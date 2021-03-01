@@ -1,0 +1,101 @@
+# espanso configuration file
+
+# This is the default configuration file, change it as you like it
+# You can refer to the official documentation:
+# https://espanso.org/docs/
+
+# Matches are the substitution rules, when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":espanso"
+    replace: "Hi there!"
+
+  # Dates
+  - trigger: ":date"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%m/%d/%Y"
+
+  # Shell commands
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo Hello from your shell"
+
+  ##OBSIDIAN Shortcuts
+  #Code Format 
+  - trigger: ":code"
+    replace: "```\n
+
+              ```"
+
+  #Footnote
+  - trigger: ":fn"
+    replace: "^[]"
+
+  #Toggle
+  - trigger: ":toggle"
+    replace: "<details markdown='1'><summary>TOGGLE</summary> CONTENIDO </details>"
+
+# Breadcrumb
+  - trigger: ":bc"
+    word: true
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: (echo "[[$((Get-Date).AddDays(-1) | Get-Date -UFormat "%Y-%m-%d")|<< Yesterday]] | [[$((Get-Date).AddDays(+1) | Get-Date -UFormat "%Y-%m-%d")|Tomorrow >>]]")
+
+# To do checklist
+  - trigger: ":todo"
+    replace: "- [ ]"
+
+# Embeded image urls
+  - trigger: ":image"
+    replace: "![name|500](url)"
+
+# URL
+  - trigger: ":url"
+    replace: "[Title](URL)"
+
+# C Header files
+  - trigger: ":ch"
+    replace: "#include <stdio.h>\n#include <cs50.h>\n#include <string.h>\n#include <ctype.h>"
+
+
+# C Main Call
+  - trigger: ":cmain"
+    replace: "int main(void)\n{\n"
+
+# C Function
+  - trigger: ":cfunc"
+    replace: "// retuns... \nreturnType functionName(void)\n{\n"
+
+# C For Loop
+  - trigger: ":cfor"
+    replace: "// loops over...\nfor (int i = 0; condition; i++)\n{\n"
+
+# C Set Up
+  - trigger: ":cset"
+    replace: "#include <stdio.h>\n#include <cs50.h>\n#include <string.h>\n\n// Functions:\n\n\nint main(void)\n{\n"
+
+# C If Statement
+  - trigger: ":cif"
+    replace: "// Checks ...\nif (condition) \n{\n"
+
+# C Header File
+  - trigger: ":clib"
+    replace: "#include <library.h>\n"
+
+
+# C For Loop for a string
+  - trigger: ":csfor"
+    replace: "// loops over string\nfor (int i = 0, n = strlen(-string-); i < n; i++)\n{\n"
